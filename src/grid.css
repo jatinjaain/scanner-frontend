@@ -1,0 +1,23 @@
+.container {
+    background: rgb(255, 255, 255);
+    display: inline-block;
+    border: 1px solid rgb(255, 0, 0);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(60, 12px);
+    grid-template-rows: repeat(20, 16px);
+    grid-gap: 1px;
+}
+
+.cell {
+    /* center the cell content */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-family: Arial;
+    font-size: 1rem;
+    font-weight: bold;
+    background: lightgray;
+}
