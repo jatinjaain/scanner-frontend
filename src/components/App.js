@@ -20,21 +20,25 @@ function App() {
   const [active, setActive] = useState(0)
 
   useEffect(() => {
-    console.log(active)
+    createConnection()
+  }, [])
+
+  useEffect(() => {
 
     const prev = document.getElementById(prevActive)
     if (prev) {
       prev.style.background = "lightgray"
     }
-
+    // whenever the active changes then we remove the green from prev
+    // and add it to the new active
     const ele = document.getElementById(active)
     if (ele) {
       ele.style.background = "green"
       setPrevActive(active)
     }
 
-
   }, [active])
+
 
   const createConnection = () => {
     let Sock = new SockJS("http://localhost:8080/ws");
@@ -43,13 +47,12 @@ function App() {
   }
 
   const onConnected = () => {
-    // console.log("Connected")
     setTimeout(() => {
       stompClient.subscribe("/userState/update", onUserStateUpdate)
       stompClient.subscribe("/userState/offset", onOffsetReceive)
       sendMove("getState")
       getOffsetFromBackend()
-    }, 500)
+    }, 50)
 
   }
 
@@ -60,22 +63,18 @@ function App() {
   const onUserStateUpdate = (payload) => {
     let payloadData = JSON.parse(payload.body)
     console.log("user state recieved from server")
-    // console.log(payloadData)
-    // setUserState({ currFocus: payloadData.currFocus, currCapture: payloadData.currCapture, alreadyFocused: payload.alreadyFocused, alreadyCaptured: payload.alreadyCaptured })
     setUserState(payloadData)
-    // console.log(userState)
   }
 
   const onOffsetReceive = (payload) => {
     let payloadData = JSON.parse(payload.body)
-    console.log("curr position recieved from server")
-    // console.log(payloadData)
+    console.log("Current position recieved from server")
     setActive(payloadData)
   }
 
   const sendMove = (move) => {
     if (stompClient) {
-      console.log("jatin sending data " + move)
+      console.log("Sending data " + move)
       stompClient.send("/app/addMove", {}, move)
     }
   }
@@ -86,9 +85,6 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    createConnection()
-  }, [])
 
 
 

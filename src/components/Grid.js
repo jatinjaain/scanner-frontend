@@ -72,10 +72,9 @@ const Grid = (props) => {
                 props.setActive(prev => prev - columns)
             }
         }
-        console.log("str " + str)
-        // console.log("move: " + move)
+        // console.log("Str " + str)
+        // console.log("Move: " + move)
         if (str != "") {
-            // setMove(str)
             move = str
             props.sendMove(move)
         }
@@ -87,7 +86,6 @@ const Grid = (props) => {
         const cells = []
 
         for (var i = 0; i < rows * columns; i++) {
-            // grid.push(0);
             cells.push(<div key={i} className='cell' id={`${i}`}></div>)
         }
         if (props.userState.alreadyFocused)
@@ -116,9 +114,6 @@ const Grid = (props) => {
                     }
                 </div>
             </div>
-
-
-
 
 
             <h5>{"Curr Position: [" + Math.floor(props.active / 60) + "," + props.active % 60 + "]"}</h5>
