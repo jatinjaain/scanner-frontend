@@ -1,14 +1,16 @@
 # Slide scanner frontend
 
-for first time
-you need to install node on your computer
+Frontend made using React
+
+You need to have Node on your computer
+
+### For first time run below command
 
 `
 npm install
 `
 
-
-### then to start
+### Then to start
 
 `
 npm start
