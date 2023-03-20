@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import "../grid.css"
 
 const Grid = (props) => {
@@ -88,6 +88,12 @@ const Grid = (props) => {
         for (var i = 0; i < rows * columns; i++) {
             cells.push(<div key={i} className='cell' id={`${i}`}></div>)
         }
+        if (props.userState.currFocus) {
+            const cell = props.userState.currFocus
+            const i = cell[0] * 60 + cell[1]
+            cells[i] = <div key={i} className='cell' id={`${i}`} style={{ color: "rgb(231, 94, 9)" }}>f</div>
+        }
+
         if (props.userState.alreadyFocused)
             props.userState.alreadyFocused.map((cell) => {
                 const i = cell[0] * 60 + cell[1]
@@ -98,6 +104,12 @@ const Grid = (props) => {
                 const i = cell[0] * 60 + cell[1]
                 cells[i] = <div key={i} className='cell' id={`${i}`}>C</div>
             })
+
+        if (props.userState.currCapture) {
+            const cell = props.userState.currCapture
+            const i = cell[0] * 60 + cell[1]
+            cells[i] = <div key={i} className='cell' id={`${i}`} style={{ color: "rgb(231, 94, 9)" }}>c</div>
+        }
         return cells;
     }
 

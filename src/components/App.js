@@ -27,7 +27,7 @@ function App() {
 
     const prev = document.getElementById(prevActive)
     if (prev) {
-      prev.style.background = "lightgray"
+      prev.style.background = "rgb(220, 220, 220)"
     }
     // whenever the active changes then we remove the green from prev
     // and add it to the new active
